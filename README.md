@@ -36,49 +36,52 @@ I will use the github workflows to detect changes in each folder of the project 
 
 ### Auto Story Generator
 
-/writersgrove-net/auto
-│
-├── /src
-│ ├── /domain
-│ │ ├── entities
-│ │ │ └── Story.ts
-│ │ ├── value-objects
-│ │ │ └── Genre.ts
-│ │ ├── aggregates
-│ │ │ └── StoryAggregate.ts
-│ │ ├── events
-│ │ │ └── StoryGenerated.ts
-│ │ ├── repositories
-│ │ │ └── StoryRepository.ts
-│ │
-│ ├── /application
-│ │ └── commands
-│ │ ├── GenerateStoryCommand.ts
-│ │ ├── ConvertStoryToAudioCommand.ts
-│ │ └── GenerateStoryImagesCommand.ts
-│ │
-│ ├── /infrastructure
-│ │ ├── repositories
-│ │ │ └── HugoStoryRepository.ts
-│ │ ├── services
-│ │ │ ├── OpenAIServiceImpl.ts
-│ │ │ ├── AudioServiceImpl.ts
-│ │ │ └── ImageServiceImpl.ts
-│ │
-│ ├── /config
-│ │ └── config.ts
-│ │
-│ └── index.ts
-│
-├── /test
-│ ├── domain
-│ ├── application
-│ ├── infrastructure
-│ └── /mocks
-│ └── OpenAIServiceMock.ts
-│
-├── .gitignore
-├── jest.config.js
-├── package.json
-├── tsconfig.json
-└── README.md
+```mermaid
+graph TD
+    A[/writersgrove-net/auto/]
+    A --> B[/src/]
+    B --> C[/domain/]
+    C --> D[/entities/]
+    D --> E[Story.ts]
+    C --> F[/value-objects/]
+    F --> G[Genre.ts]
+    C --> H[/aggregates/]
+    H --> I[StoryAggregate.ts]
+    C --> J[/events/]
+    J --> K[StoryGenerated.ts]
+    C --> L[/repositories/]
+    L --> M[StoryRepository.ts]
+
+    B --> N[/application/]
+    N --> O[/commands/]
+    O --> P[GenerateStoryCommand.ts]
+    O --> Q[ConvertStoryToAudioCommand.ts]
+    O --> R[GenerateStoryImagesCommand.ts]
+
+    B --> S[/infrastructure/]
+    S --> T[/repositories/]
+    T --> U[HugoStoryRepository.ts]
+    S --> V[/services/]
+    V --> W[OpenAIServiceImpl.ts]
+    V --> X[AudioServiceImpl.ts]
+    V --> Y[ImageServiceImpl.ts]
+
+    B --> Z[/config/]
+    Z --> AA[config.ts]
+
+    B --> AB[index.ts]
+
+    A --> AC[/test/]
+    AC --> AD[domain/]
+    AC --> AE[application/]
+    AC --> AF[infrastructure/]
+    AC --> AG[/mocks/]
+    AG --> AH[OpenAIServiceMock.ts]
+
+    A --> AI[.gitignore]
+    A --> AJ[jest.config.js]
+    A --> AK[package.json]
+    A --> AL[tsconfig.json]
+    A --> AM[README.md]
+
+```
