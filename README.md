@@ -34,17 +34,14 @@ This will be a mono repo that has both the auto story generation and the Hugo bl
 
 I will use the github workflows to detect changes in each folder of the project to determine which set of workflows to run.
 
-### Auto Story Generator
+### Auto Story Generator Design
+
+### Domain
 
 ```mermaid
 graph TD
-    %% Root directory
     A[/writersgrove-net/auto/]
-
-    %% Source directory
     A --> B[/src/]
-
-    %% Domain directory
     B --> C[/domain/]
     C --> D[/entities/]
     D --> E[Story.ts]
@@ -57,14 +54,25 @@ graph TD
     C --> L[/repositories/]
     L --> M[StoryRepository.ts]
 
-    %% Application directory
+```
+
+### Commands
+
+```mermaid
+graph TD
+    B[/src/]
     B --> N[/application/]
     N --> O[/commands/]
     O --> P[GenerateStoryCommand.ts]
     O --> Q[ConvertStoryToAudioCommand.ts]
     O --> R[GenerateStoryImagesCommand.ts]
+```
 
-    %% Infrastructure directory
+### Infrastructure
+
+```mermaid
+graph TD
+    B[/src/]
     B --> S[/infrastructure/]
     S --> T[/repositories/]
     T --> U[HugoStoryRepository.ts]
@@ -73,25 +81,25 @@ graph TD
     V --> X[AudioServiceImpl.ts]
     V --> Y[ImageServiceImpl.ts]
 
-    %% Config directory
-    B --> Z[/config/]
-    Z --> AA[config.ts]
+```
 
-    %% Index file
-    B --> AB[index.ts]
+### Tests and other files
 
-    %% Test directory
+```mermaid
+graph TD
+    A[/writersgrove-net/auto/]
+    A --> B[/src/]
+    B --> BA[index.ts]
     A --> AC[/test/]
     AC --> AD[domain/]
     AC --> AE[application/]
     AC --> AF[infrastructure/]
     AC --> AG[/mocks/]
     AG --> AH[OpenAIServiceMock.ts]
-
-    %% Other files
     A --> AI[.gitignore]
     A --> AJ[jest.config.js]
     A --> AK[package.json]
     A --> AL[tsconfig.json]
     A --> AM[README.md]
+    A --> AN[/dist/]
 ```
