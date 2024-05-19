@@ -38,8 +38,13 @@ I will use the github workflows to detect changes in each folder of the project 
 
 ```mermaid
 graph TD
+    %% Root directory
     A[/writersgrove-net/auto/]
+
+    %% Source directory
     A --> B[/src/]
+
+    %% Domain directory
     B --> C[/domain/]
     C --> D[/entities/]
     D --> E[Story.ts]
@@ -52,12 +57,14 @@ graph TD
     C --> L[/repositories/]
     L --> M[StoryRepository.ts]
 
+    %% Application directory
     B --> N[/application/]
     N --> O[/commands/]
     O --> P[GenerateStoryCommand.ts]
     O --> Q[ConvertStoryToAudioCommand.ts]
     O --> R[GenerateStoryImagesCommand.ts]
 
+    %% Infrastructure directory
     B --> S[/infrastructure/]
     S --> T[/repositories/]
     T --> U[HugoStoryRepository.ts]
@@ -66,11 +73,14 @@ graph TD
     V --> X[AudioServiceImpl.ts]
     V --> Y[ImageServiceImpl.ts]
 
+    %% Config directory
     B --> Z[/config/]
     Z --> AA[config.ts]
 
+    %% Index file
     B --> AB[index.ts]
 
+    %% Test directory
     A --> AC[/test/]
     AC --> AD[domain/]
     AC --> AE[application/]
@@ -78,10 +88,10 @@ graph TD
     AC --> AG[/mocks/]
     AG --> AH[OpenAIServiceMock.ts]
 
+    %% Other files
     A --> AI[.gitignore]
     A --> AJ[jest.config.js]
     A --> AK[package.json]
     A --> AL[tsconfig.json]
     A --> AM[README.md]
-
 ```
