@@ -1,33 +1,34 @@
-export class Genre {
-  private static readonly genres: string[] = [
-    'Fantasy',
-    'Science Fiction',
-    'Horror',
-    'Space Opera',
-    'Mystery',
-    'Cyberpunk',
-    'Romance',
-    'Steampunk',
-    'High Fantasy',
-    'Low Fantasy',
-    'Cthulhu Mythos',
-    'LitRPG',
-    'GameLit',
-    'Hard Sci-Fi',
-    'Soft Sci-Fi',
-    'Military Sci-Fi',
-    'Superhero',
-    'Post-Apocalyptic',
-  ];
+import { __brand, Branded } from './BrandedTypes';
 
-  static getRandomGenre(): string {
+const genres: string[] = [
+  'Fantasy',
+  'Science Fiction',
+  'Horror',
+  'Space Opera',
+  'Mystery',
+  'Cyberpunk',
+  'Romance',
+  'Steampunk',
+  'High Fantasy',
+  'Low Fantasy',
+  'Cthulhu Mythos',
+  'LitRPG',
+  'GameLit',
+  'Hard Sci-Fi',
+  'Soft Sci-Fi',
+  'Military Sci-Fi',
+  'Superhero',
+  'Post-Apocalyptic',
+] as const; // Marking it as a const makes it a tuple so we can use it as a type. - Even though we declare it as a const at the start we need this to correctly infer the tuple type property.
+
+type Genre = (typeof genres)[number];
+
+class Genres {
+  private static readonly genres = genres;
+
+  static getRandomGenre(): Genre {
     return this.genres[Math.floor(Math.random() * this.genres.length)];
   }
-
-  // This function is not currently used in the codebase but exists for testing purposes
-  static validateGenre(genre: string): void {
-    if (!this.genres.includes(genre)) {
-      throw new Error(`Invalid genre: ${genre}`);
-    }
-  }
 }
+
+export { Genre, Genres };
