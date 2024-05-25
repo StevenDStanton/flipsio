@@ -1,4 +1,4 @@
-name: Test and Upload Coverage to Coveralls
+name: Coveralls Code Coverage
 
 on:
   pull_request:
@@ -30,6 +30,10 @@ jobs:
       - name: Run tests with coverage
         working-directory: auto
         run: npm run test -- --coverage
+
+      - name: List coverage directory
+        working-directory: auto
+        run: ls -R coverage
 
       - name: Upload coverage to Coveralls
         env:
