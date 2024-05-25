@@ -1,4 +1,4 @@
-import { Genre, Genres } from '../../src/domain/valueObjects/genre';
+import { Genre, Genres } from '../../src/domain/valueObjects/Genres';
 
 describe('Genre Value Object', () => {
   it('should return a random genre', () => {
