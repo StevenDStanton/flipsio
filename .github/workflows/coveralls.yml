@@ -27,6 +27,10 @@ jobs:
         working-directory: auto
         run: npm install
 
+      - name: Compile TypeScript
+        working-directory: auto
+        run: npm run build
+
       - name: Run tests with coverage
         working-directory: auto
         run: npm run test -- --coverage
