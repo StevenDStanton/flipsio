@@ -1,0 +1,38 @@
+name: Test and Upload Coverage to Coveralls
+
+on:
+  push:
+    branches: ['*']
+    paths:
+      - 'auto/**'
+  pull_request:
+    branches: ['*']
+    paths:
+      - 'auto/**'
+
+jobs:
+  test-and-coveralls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Specify your Node.js version
+
+      - name: Install dependencies
+        working-directory: auto
+        run: npm install
+
+      - name: Run tests with coverage
+        working-directory: auto
+        run: npm run test -- --coverage
+
+      - name: Upload coverage to Coveralls
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        working-directory: auto
+        run: npx coveralls < coverage/lcov.info
