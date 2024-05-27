@@ -25,3 +25,5 @@ class Story {
     return this.content;
   }
 }
+
+export { Story };
