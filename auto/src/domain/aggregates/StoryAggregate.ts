@@ -10,12 +10,11 @@ export class StoryAggregate {
     const storyData = await this.fetchStoryFromOpenAI(genre);
 
     const story = new Story(
-      storyData.id,
       storyData.title,
       storyData.synopsis,
-      storyData.content,
       genre,
-      storyData.keywords,
+      storyData.keywords.split(','),
+      storyData.content,
     );
 
     await this.storyRepository.save(story);

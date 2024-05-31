@@ -7,3 +7,5 @@ class StoryGenerated {
     return this.story;
   }
 }
+
+export { StoryGenerated };
