@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc --build --clean",
     "test": "jest --coverage"
   },
   "repository": {
@@ -34,6 +34,7 @@
   },
   "dependencies": {
     "@libsql/client": "^0.6.1",
+    "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.10",
     "openai": "^4.47.1"
   }
