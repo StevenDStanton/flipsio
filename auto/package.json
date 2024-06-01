@@ -1,13 +1,14 @@
 {
   "name": "writersgrove-net",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AI Storyteller",
   "main": "dist/index.js",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "build": "tsc --build --clean",
+    "test": "jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -25,11 +26,17 @@
   "homepage": "https://github.com/StevenDStanton/writersgrove-net#readme",
   "devDependencies": {
     "@types/jest": "^29.5.12",
+    "coveralls-next": "^4.2.1",
+    "drizzle-kit": "^0.21.4",
     "jest": "^29.7.0",
     "ts-jest": "^29.1.2",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "openai": "^4.47.1"
+    "@libsql/client": "^0.6.1",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.30.10",
+    "openai": "^4.47.3",
+    "sqlite3": "^5.1.7"
   }
 }

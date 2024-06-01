@@ -1,21 +1,22 @@
 {
     "compilerOptions": {
         "module": "commonjs",
-        "declaration": true,
-        "removeComments": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true,
         "target": "ES2021",
-        "sourceMap": true,
+        "declaration": true,
         "outDir": "./dist",
-        "baseUrl": "./",
-        "incremental": true,
+        "rootDir": "./src",
+        "strict": true, // Consider turning on strict mode for better type checking
+        "esModuleInterop": true,
         "skipLibCheck": true,
-        "strictNullChecks": false,
-        "noImplicitAny": false,
-        "strictBindCallApply": false,
-        "forceConsistentCasingInFileNames": false,
-        "noFallthroughCasesInSwitch": false
-    }
+        "incremental": true,
+        "sourceMap": true // Enable source maps for better debugging support
+    },
+    "include": [
+        "src/**/*" // Only include files from the src directory
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "test" // Exclude test directory from TypeScript compilation
+    ]
 }

@@ -1,0 +1,62 @@
+name: Coveralls Code Coverage
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: ['*']
+    paths:
+      - 'auto/**'
+
+jobs:
+  test-and-coveralls:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Check Auto Changes
+        id: check_auto_changes
+        run: |
+          if git diff --name-only HEAD^ HEAD | grep 'auto/'; then
+            echo "Auto folder has changed"
+            echo "::set-output name=auto_changed::true"
+          else
+            echo "Auto folder has not changed"
+            echo "::set-output name=auto_changed::false"
+          fi
+
+      - name: Set up Node.js
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20' # Specify your Node.js version
+
+      - name: Install dependencies
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        working-directory: auto
+        run: npm install
+
+      - name: Compile TypeScript
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        working-directory: auto
+        run: npm run build
+
+      - name: Run tests with coverage
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        working-directory: auto
+        run: npm run test -- --coverage
+
+      - name: List coverage directory
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        working-directory: auto
+        run: ls -R coverage
+
+      - name: Upload coverage to Coveralls
+        if: steps.check_auto_changes.outputs.auto_changed == 'true'
+        env:
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+        working-directory: auto
+        run: npx coveralls < coverage/lcov.info
