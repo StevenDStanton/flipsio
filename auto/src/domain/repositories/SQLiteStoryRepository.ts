@@ -6,6 +6,7 @@ export class SQLiteStoryRepository implements StoryRepository {
   private db: sqlite3.Database;
 
   constructor(databaseFile: string) {
+    console.log(databaseFile, typeof databaseFile);
     this.db = new sqlite3.Database(databaseFile);
     this.initializeDatabase();
   }

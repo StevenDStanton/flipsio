@@ -2,8 +2,6 @@ import 'dotenv/config';
 import { SQLiteStoryRepository } from './domain/repositories/SQLiteStoryRepository';
 import { StoryAggregate } from './domain/aggregates/StoryAggregate';
 
-console.log('Running story generation');
-
 const storyRepository = new SQLiteStoryRepository(
   process.env.DATABASE_FILE as string,
 );
