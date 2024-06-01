@@ -1,6 +1,6 @@
 import { Story } from '../entities/Story';
 import { Genres, Genre } from '../valueObjects/Genres';
-import { StoryRepository } from '../repositories/StoryRepository';
+import { StoryRepository } from '../interfaces/StoryRepository';
 import { StoryGenerated } from '../events/StoryGenerated';
 export class StoryAggregate {
   constructor(private storyRepository: StoryRepository) {}
