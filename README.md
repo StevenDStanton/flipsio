@@ -2,8 +2,7 @@
 
 ## Project Requirements
 
-- Typescript
-- Jest Testing Framework
+- Go
 - Domain Driven Architecture
 
 ## Project Phases
