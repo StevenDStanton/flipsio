@@ -5,6 +5,14 @@
 - Go
 - Domain Driven Architecture
 
+## Testing
+
+To run all tests run
+
+```bash
+go test ./... -v
+```
+
 ## Project Phases
 
 - Todo
@@ -12,7 +20,7 @@
   - [ ] Setup SQLite Database
   - [ ] Setup Frontend Hugo Blog
   - [ ] Real Cronjob
-  - [ ] Random Genre from Array
+  - [x] Random Genre from Array
   - [ ] Use Open AI to generate a json object that includes a story, title, synopsis, and keywords
   - [ ] Save generated story to DB
   - [ ] Generate pictures from story
