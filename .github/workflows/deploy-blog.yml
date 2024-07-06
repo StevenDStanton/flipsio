@@ -14,44 +14,27 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Check Blog Changes
-        id: check_blog_changes
-        run: |
-          if git diff --name-only HEAD^ HEAD | grep 'blog/'; then
-            echo "Blog has changed"
-            echo "::set-output name=blog_changed::true"
-          else
-            echo "Blog has not changed"
-            echo "::set-output name=blog_changed::false"
-          fi
-
       - name: Install required software
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
         run: |
           sudo apt-get update
           sudo apt-get install -y hugo awscli npm
 
-      - name: Install npm
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
-        run: npm install
-
-      - name: Build the Hugo site
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
-        run: hugo
+      - name: Install
+        run: |
+          cd blog
+          npm install
+          hugo
 
       - name: Configure AWS CLI
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws configure set default.region ${{ secrets.S3_BUCKET_REGION }}
 
       - name: Sync to S3
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
         run: aws s3 sync public/ s3://${{ secrets.S3_BUCKET }} --delete
 
       - name: Create CloudFront invalidation
-        if: steps.check_blog_changes.outputs.blog_changed == 'true'
         run: |
           invalidationBatch=$(jq -n --arg callerReference $(date -u +"%Y-%m-%dT%H:%M:%SZ") --argjson items '["/*"]' '{"Paths": {"Quantity": 1, "Items": $items}, "CallerReference": $callerReference}')
           aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_DISTRIBUTION_ID }} --invalidation-batch "$invalidationBatch"
